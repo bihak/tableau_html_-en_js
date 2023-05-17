@@ -1,4 +1,27 @@
+table{
+    margin: auto;
+}
 td {
     border: solid 1px black;
+    width: 143px;
 }
-
+h1{
+    text-align: center;
+}
+form{
+    text-align: center;
+}
+form input[type=text]{
+    width: 300px;
+}
+form input[type=submit]{
+    display: block;
+    margin: auto;
+}
+#tablau{
+    display: flex;
+}
+.tab_checkbox ,.tab_checkbox{
+    border: none;
+    width: 20px;
+}
