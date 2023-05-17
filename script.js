@@ -26,10 +26,11 @@ let formulaire = document.createElement("form")
     formulaire.id = 'formulaire'
     formulaire.method = 'post'
     document.body.appendChild(formulaire)
-
-let inputtext = document.createElement("input")
+let inputtext = document.createElement("textarea")
     inputtext.id = 'text'
     inputtext.type = 'text'
+    inputtext.cols = '61'
+    inputtext.rows ='10'
     formulaire.appendChild(inputtext)
 
 let bouton_check = document.createElement("input")
@@ -123,30 +124,48 @@ let ajout = document.getElementById('ajout');
 ajout.addEventListener("click", function(e){
     e.preventDefault()
     let tab_ajou = document.getElementById("table")
-    let taille = tab_ajou.rows.length
-    let th = tab_ajou.insertRow(taille)
-        th.id = "tablau"+taille
-    let val = document.getElementById("text").value
+        let taille = tab_ajou.rows.length
+        let val = document.getElementById("text").value
+        console.log(val)
+        let tab_ajouter = []
+        tab_ajouter = val.split("\n")
+        console.log(tab_ajouter)
+    for (let i = 0; i < tab_ajouter.length; i++) {  
 
-    let checkbox = document.createElement('input')
-    checkbox.type = "checkbox";
-    checkbox.id = "bouton_checkbox"+taille
-    let check = th.insertCell(0);
-    check.classList = 'tab_checkbox'
-    check.appendChild(checkbox)
+        
+        verif1 = JSON.stringify(tab_ajouter[i]).replace(/"/g, ' ')
+        verif2 = verif1.split(/[+=]/).join(' ')
+        if(verif2.includes('--')){
+            console.log(99999)
+            text.style.border = "solid 1px red";
+            let message = document.createElement("p")
+            document.body.appendChild(message)
+            const newContent = document.createTextNode("caracter interdit");
+            message.appendChild(newContent)
 
-    let td1 = th.insertCell(1)
+        }else{
+        let th = tab_ajou.insertRow(taille)
+            th.id = "tablau"+taille
+        let checkbox = document.createElement('input')
+        checkbox.type = "checkbox";
+        checkbox.id = "bouton_checkbox"+taille
+        let check = th.insertCell(0);
+        check.classList = 'tab_checkbox'
+        check.appendChild(checkbox)
+        let td1 = th.insertCell(1)
         td1.id = "soustableau_nom"+taille
 
-    let td2 = th.insertCell(2)
+        let td2 = th.insertCell(2)
         td2.id = "soustableau"+taille
 
-    let td3 = th.insertCell(3)
-        td3.id = "input_soustableau"+taille
-
-    td1.innerHTML = val
-    td2.innerHTML = ""
-    td3.innerHTML = '<button onclick="sup(this)">supprimer</button><button onclick="dep(this)">deplacer</button>'
+        let td3 = th.insertCell(3)
+        td3.id = "input_soustableau"+taille  
+        
+        td1.innerHTML = verif2
+        td2.innerHTML = ""
+        td3.innerHTML = '<button onclick="sup(this)">supprimer</button><button onclick="dep(this)">deplacer</button>'
+    }}
+    
     
 })
 let checksup = document.getElementById('bouton_sup');

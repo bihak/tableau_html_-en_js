@@ -5,7 +5,7 @@ td {
     border: solid 1px black;
     width: 143px;
 }
-h1{
+h1,p{
     text-align: center;
 }
 form{
